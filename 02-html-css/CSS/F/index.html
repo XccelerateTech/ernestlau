@@ -1,0 +1,73 @@
+<head>
+    <style type="text/css">
+        .bg {
+            height:600px;
+            width:100%;
+            border-top: 3px solid gray;
+            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("./img/flowershop.jpg");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bg > p {
+            color: white;
+            font-size: 2.25em;
+            font-family: Verdana, Times, serif;
+        }
+        
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 8px 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1em;
+            border-radius: 30px;
+        }
+
+        #content {
+            background-color:#b3e894;
+            height:auto;
+            display: flex;
+            flex-direction:row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap:wrap;
+        }
+
+        #content > img {
+            margin: 60px 10px;
+        }
+
+        #content > p {
+            width:150px;
+            font-family:"Arial";
+        }
+
+    </style>
+</head>
+<body>
+    <section id="header">
+        <div><img src="./img/logo.png"></div>
+    </section>
+    <section id="main">
+        <div class="bg"><p>Beautiful Flowers</p>
+        <button>Learn more</button>
+        </div>
+    </section>
+    <section id="content">
+        <img src="./img/flower-icon.png">
+        <p>Flowers for every kind of situation</p>
+        <img src="./img/payment-icon.png">
+        <p>All major payments kinds accepted</p>
+        <img src="./img/phone-icon.png">
+        <p>Free consulation</p>
+        <img src="./img/truck-icon.png">
+        <p>City wide delivery</p>
+    </section>
+</body>
