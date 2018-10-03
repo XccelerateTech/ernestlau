@@ -73,6 +73,12 @@
     .navbar-brand {
         font-size: 15px;
     }
+    p {
+        width: auto !important;
+    }
+    h2 {
+        width: auto !important;
+    }
 }
   
   .content p{
