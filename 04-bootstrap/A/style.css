@@ -1,0 +1,227 @@
+  .header-content {
+    position: relative;
+    height: 100vh;
+    min-height: auto;
+    text-align: center;
+    color: #fff;
+    background-image: url(./img/header.jpg);
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
+
+  .navbar {
+      color: #000;
+      text-transform: uppercase;
+      font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+      font-weight: 700;
+      border-bottom: 1px solid;
+      min-height: 8vh;
+      height: auto;
+      opacity: 0.3;
+      background: #fff;
+      transition: all 0.5s;
+  }
+
+  .nav-link {
+      color: #000;
+      padding: 0 !important;
+  }
+  .solid {
+    background: #fff;
+    border-bottom: solid 1px #fff;
+    opacity: 1;
+}
+  .navbar-brandActive{
+      color: orangered !important;
+      font-weight: 750 !important;
+      transition: all 0.3s;
+  }
+
+  .custom-toggler {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+  .nav-item {
+    display: block;
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+
+  #navbarTogglerDemo02 {
+      width: 400px !important;
+  }
+
+  h1 {
+      font-size: 4vw;
+      width: 70vw;
+      font-weight: 800;
+  }
+
+  .content {
+      padding-top: 25vh;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .header-content {
+        font-size: 0.8rem;
+        height: auto;
+        padding-bottom: 10vh;
+    }
+    .navbar-brand {
+        font-size: 15px;
+    }
+}
+  
+  .content p{
+    padding-bottom: 7vh;
+    font-size: 1.2rem;
+    width: 50vw;
+    margin: auto;
+}
+
+  hr {
+      border-bottom: 3px solid #f05f40;
+      width:5vw;
+
+  }
+
+  .content .btn {
+      background-color: red !important;
+      border: red !important;
+      color: #fff !important;
+  }
+
+  .content .btn:hover {
+    background-color: lightcoral !important;
+  }
+
+  .content .btn:active {
+    background-color: red !important;
+  }
+
+  .about {
+      background-color: #ff7f35;
+      color: #fff;
+      height: auto;
+      min-height: 65vh;
+      padding-bottom: 100px;
+  }
+
+  h2 {
+    font-size: 2rem;
+    width: 70vw;
+    font-weight: 400;
+    padding-top: 10vh;
+    margin: auto;
+  }
+
+  .about p {
+      width: 60vw;
+      margin: auto; 
+      font-size: 2vh;
+      padding-bottom: 7vh;
+  }
+
+  .btn {
+      background-color: #fff;
+      border: #fff;
+      color: #000 !important;
+      border-radius: 30px;
+      padding: 15px 25px;
+  }
+
+  .btn:hover {
+    background-color: lightgray !important;
+  }
+
+  .about .btn:active {
+    background-color: #fff !important;
+}
+
+  .fouricon {
+    background-color: #fff;
+    color: #000;
+    padding-bottom: 10vh;
+}
+
+  .fouricon h3 {
+      font-size: 1.2rem;
+  }
+
+  .fouricon p {
+      font-size: 0.9rem;
+      color: #605f5d;
+  }
+
+  i {
+      padding: 10px;
+      color: #f05f40;
+  }
+
+  .bullshit {
+      background-color: #333;
+      height: auto;
+      min-height: 50vh;
+      padding-bottom: 100px;
+  }
+
+  .imgframe {
+    padding: 0;
+  }
+
+  .bullshit h2 {
+      color: #fff;
+      padding-bottom: 6vh;
+  }
+
+  .bullshit .hint {
+    opacity: 0;
+    transition: opacity 0.5s;   
+    background: rgba(240,95,64,0.8);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.25rem;
+}
+
+.bullshit .word {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.bullshit .hint:hover {
+    opacity: 1;
+}
+
+.nav-link.active {
+    color: #f05f40 !important;
+    font-weight: bold;
+}
+
+.contact {
+    height: 60vh;
+    min-height: auto;
+}
+
+.contact p {
+    width: 50vw;
+    color: #888;
+    margin: auto;
+    padding: 20px;
+}
+
+.contact i {
+    padding: -10px;
+    color: #000;
+}
