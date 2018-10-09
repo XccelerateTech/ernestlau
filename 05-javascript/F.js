@@ -20,4 +20,7 @@ function transform(num) {
 return toEng.join("");
 }
 
+let numb2 = 1234;
+
 console.log(transform('21314032425209428'));
+console.log(numb2.toString);

@@ -10,6 +10,3 @@
 
 	module.exports = Gigasecond;
 
-	var gs = new Gigasecond(Date.UTC(2015, 8, 14));
-	console.log(gs.date());
- 

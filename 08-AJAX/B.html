@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Countries APi testing</title>
+</head>
+<body>
+<p id="demo"></p>
+</body>
+<script type="text/javascript">
+  function informMe(endpoint, value, callback) {
+   var http = new XMLHttpRequest(); // Call the AJAX here, And get the Data
+   http.open(
+     "GET",
+     `https://restcountries.eu/rest/v2/${endpoint}/${value}`,
+     true
+   );
+  
+   http.onreadystatechange = function() {
+     if (http.readyState != XMLHttpRequest.DONE) {
+       return;
+     } else if (http.status == 200) {
+       callback(JSON.parse(http.responseText));
+     } else {
+       console.log("error occurred" + http.status);
+     }
+   };
+  
+  //   callback(data); // Return the Data by calling callback with the resulting data
+  
+  http.send();
+  
+  }
+  // onreadystatechange should be before http.send()
+  
+  informMe("capital", "tokyo", function(callback){
+    document.getElementById("demo").innerHTML = `The Country you have requested is ${callback[0].nativeName}`;
+  });
+  
+  
+  
+  </script>
+</html>

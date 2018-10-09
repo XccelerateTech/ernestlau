@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Countries APi testing</title>
+<script type="text/javascript">
+function whoIsInSpace(callback) {
+ var http = new XMLHttpRequest(); // Call the AJAX here, And get the Data
+ http.open(
+   "GET",
+   "./astros.json",
+   true
+ );
+
+ http.onreadystatechange = function() {
+   if (http.readyState != XMLHttpRequest.DONE) {
+     return;
+   } else if (http.status == 200) {
+       let parsedObj = JSON.parse(http.responseText);
+       let asshole = parsedObj.people.map(function(n) {
+    return n.name;
+});
+     callback(asshole);
+   } else {
+     console.log("error occurred" + http.status);
+   }
+ };
+
+//   callback(data); // Return the Data by calling callback with the resulting data
+
+http.send();
+
+}
+// onreadystatechange should be before http.send()
+
+whoIsInSpace(function(callback){
+   console.log(callback);
+});
+
+</script>
+</head>
+<body>
+<p>API Testing</p>
+</body>
+</html>
