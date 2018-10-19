@@ -1,0 +1,31 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <span>Hello! Generate a random user name!</span>
+        <button>Click me!</button>
+        <p id="result"></p>
+    </body>
+        <script type='text/javascript'>
+
+        let makeRandomUser = function(callback){ 
+        $.get('https://randomuser.me/api/', function(data){
+        console.log("This function will be run if the ajax is successful");
+        name = `${data.results[0].name.title.toUpperCase()}.${data.results[0].name.first} ${data.results[0].name.last}`
+        callback(name);
+        }).fail(function(data){
+        console.log("This function will be run if the ajax if failed");
+         });
+        }
+
+        $(document).ready(function(){
+        $("button").click(function(){
+            makeRandomUser(function(data){;
+                $('#result').append(`<br>${data}`);
+            });;
+        });
+    });
+
+        </script>
+</html>

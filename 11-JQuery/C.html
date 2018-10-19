@@ -1,0 +1,22 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <span>Hello!</span>
+    </body>
+        <script type='text/javascript'>
+        let informe = function(endpoint,value,callback){ 
+        $.get(`https://restcountries.eu/rest/v2/${endpoint}/${value}`, function(data){
+        console.log("This function will be run if the ajax is successful");
+        callback(data);
+        }).fail(function(data){
+        console.log("This function will be run if the ajax if failed");
+         });
+        }
+
+    informe('name','united',function(callback){
+    console.log(callback[3].translations.ja);
+  });
+</script>
+</html>

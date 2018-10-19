@@ -1,0 +1,31 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <span>Hello!</span>
+    </body>
+        <script type='text/javascript'>
+    $(function(){ 
+        $.ajax({
+            url:"./data.json",
+            beforeSend:function(xhr){
+                console.log("This function will be run before sending ajax")
+                $("span").html( "Loading");
+            },
+            type: "GET",
+            data: {
+            }
+        }).done(function(data){
+            console.log("This function will be run if the ajax is successful");
+            console.log(data[1].name);
+            $("span").html( "<b>Loading done!</b>");
+        }).fail(function(data){
+            console.log("This function will be run if the ajax if failed");
+            $("span").html( "<b>Loading fail!</b>");
+        }).always(function(data){
+            // console.log("This function runs no matter success or fail.");
+        });
+    });
+</script>
+</html>

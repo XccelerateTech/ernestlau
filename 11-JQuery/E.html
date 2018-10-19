@@ -1,0 +1,87 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Checking Sunset these 2 day! (UTC Time)</h1>
+        <form action="" id="form" onsubmit="return false;">
+                <input type='text' name="lat" placeholder="Latitude" value="22.31"/>
+                <input type="text" name="lng" placeholder="Longitude" value="114"/>
+                <input type='submit' value="submit"/>
+        </form>
+        <p></p>
+    </body>
+<script type='text/javascript'>
+
+        let checkSun = function(){
+        var serializedInputString = $('#form').serialize();
+        var tmrinfo = $.get(`https://api.sunrise-sunset.org/json?${serializedInputString}&formatted=0&date=tomorrow`);
+        var yestinfo = $.get(`https://api.sunrise-sunset.org/json?${serializedInputString}&formatted=0&date=yesterday`);
+
+        var combined = $.when(tmrinfo, yestinfo);
+
+        combined.done(function(tinfo,yinfo){
+            console.log("I will be run when both get Requests are successfully run.")
+            let tmrsunrise = new Date(tinfo[0].results.sunrise);
+            let tmrsunset = new Date(tinfo[0].results.sunset);
+            let ysunrise = new Date(yinfo[0].results.sunrise);
+            let ysunset = new Date(yinfo[0].results.sunset);
+            let now = new Date();
+            $('p').html("Sunrise yesterday form now is: " + msToTime(now - ysunrise) + "<br>" + "     Sunset yesterday form now is: " + msToTime(now - ysunset)
+            + "<br>" + `It will take ${msToTime(tmrsunrise - now)} to tomorrow sunrise and ${msToTime(tmrsunset - now)} to tomorrow sunset`);
+        }).fail(function(error1,error2){
+            console.log(error1);
+            console.log(error2);
+        }).always(function(){
+            ;
+        });
+        
+        // $.ajax({
+        //     type:'GET',
+        //     url:`https://api.sunrise-sunset.org/json?${serializedInputString}&formatted=0 `,
+        //     beforeSend:function(xhr){
+        //         $.ajax({
+        //         type:'GET',
+        //         url:`https://api.sunrise-sunset.org/json?${serializedInputString}&formatted=0&date=yesterday`,
+        //         dataType: "json",
+        //         success: function(data){
+        //         console.log(data);
+        //         console.log('yday')
+        //     },
+        // });
+        //     },
+        //     dataType: "json",
+        //     success: function(data){
+        //         callback(data);
+        //     },
+        // });
+    };
+
+    // ms to HH:MM:SS
+    function msToTime(s) {
+            function pad(n, z) {
+                z = z || 2;
+                return ('00' + n).slice(-z);
+            }
+
+            var ms = s % 1000;
+            s = (s - ms) / 1000;
+            var secs = s % 60;
+            s = (s - secs) / 60;
+            var mins = s % 60;
+            var hrs = (s - mins) / 60;
+
+            return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+            }
+    // end
+
+    $(document).ready(function(){
+    $("#form").submit(function(){
+        checkSun(function(){;
+
+  });;
+    });
+});
+
+</script>
+</html>

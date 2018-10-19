@@ -1,0 +1,59 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <span>Hello! Check ramdom user sunset & sunrise!</span>
+        <button>Click me!</button>
+        <p id="result"></p>
+    </body>
+        <script type='text/javascript'>
+
+        let makeRandomUser = function(callback){ 
+            var userinfo = $.get(`https://randomuser.me/api/?results=2`);
+            userinfo.done(function(usersinfo){
+                console.log("1st ok.")
+                var user1name = `${usersinfo.results[0].name.title.toUpperCase()}.${usersinfo.results[0].name.first} ${usersinfo.results[0].name.last}`;
+                var user2name = `${usersinfo.results[1].name.title.toUpperCase()}.${usersinfo.results[1].name.first} ${usersinfo.results[1].name.last}`;
+                var user1time = `GMT${usersinfo.results[0].location.timezone.offset}`;
+                var user2time = `GMT${usersinfo.results[1].location.timezone.offset}`;
+                var user1request = $.get(`https://api.sunrise-sunset.org/json?lat=${usersinfo.results[0].location.coordinates.latitude}&lng=${usersinfo.results[0].location.coordinates.longitude}`);
+                var user2request = $.get(`https://api.sunrise-sunset.org/json?lat=${usersinfo.results[1].location.coordinates.latitude}&lng=${usersinfo.results[1].location.coordinates.longitude}`);
+                var combined = $.when(user1request, user2request);
+                
+                combined.done(function(user1rawinfo,user2rawinfo){
+                    console.log("I will be run when both get Requests are successfully run.")
+                    var user1sunrise = user1rawinfo[0].results.sunrise;
+                    var user1sunset = user1rawinfo[0].results.sunset;
+                    var user2sunrise = user2rawinfo[0].results.sunrise;
+                    var user2sunset = user2rawinfo[0].results.sunset;
+                    var finalresult = `Sunrise of ${user1name}'s location is at ${user1sunrise} and sunset at ${user1sunset}, and his/her timezone is ${user1time}. <br>
+                    Sunrise of ${user2name}'s location is at ${user2sunrise} and sunset at ${user2sunset}, and his/her timezone is ${user2time}.<br>`;
+                    callback(finalresult);
+                }).fail(function(error1,error2){
+                    console.log(error1);
+                    console.log(error2);
+                }).always(function(){
+                    ;
+                });
+
+
+                // console.log("I will be run when both get Requests are successfully run.");
+                // console.log(user1request);
+
+
+        }).fail(function(error){
+            console.log(error);
+                });
+            };
+
+        $(document).ready(function(){
+        $("button").click(function(){
+            makeRandomUser(function(data){;
+                $('#result').append(`<br>${data}`);
+            });;
+        });
+    });
+
+        </script>
+</html>

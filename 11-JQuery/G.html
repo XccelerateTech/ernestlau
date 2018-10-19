@@ -1,0 +1,101 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Checking sunrise with Country name (Not local time)</h1>
+        <form action="" id="form" onsubmit="return false;">
+                <input type='text' name="country1" placeholder="First Country" value="Japan"/>
+                <input type="text" name="country2" placeholder="Second Country" value="Germany"/>
+                <input type='submit' value="submit"/>
+        </form>
+        <p id="sunriseresult"></p>
+        <p id="sunsetresult"></p>
+    </body>
+<script type='text/javascript'>
+
+    let checkSun = function(){
+        let inputCounty1 = $("input[name='country1']").val();
+        let inputCounty2 = $("input[name='country2']").val();
+        var countryRequest1 = $.get(`https://restcountries.eu/rest/v2/name/${inputCounty1}`);
+        var countryRequest2 = $.get(`https://restcountries.eu/rest/v2/name/${inputCounty2}`);
+        var deferred = $.Deferred();
+
+        var countryCombined = $.when(countryRequest1, countryRequest2);
+            countryCombined.done(function(country1,country2){
+            deferred.resolve(country1,country2);
+ 
+        }).fail(function(error1,error2){
+            alert('Check your country name');
+
+        }).always(function(){
+            $('#sunriseresult').html('Loading...');
+            $('#sunsetresult').html('Loading...');
+        });
+
+        var countryToSun = $.when(deferred).done(function(country1,country2){
+            var country1lat = country1[0][0].latlng[0]
+            var country1lng = country1[0][0].latlng[1]
+            var country2lat = country2[0][0].latlng[0]
+            var country2lng = country2[0][0].latlng[1]
+            var country1SunRequest = $.get(`https://api.sunrise-sunset.org/json?lat=${country1lat}&lng=${country1lng}&formatted=0`);
+            var country2SunRequest = $.get(`https://api.sunrise-sunset.org/json?lat=${country2lat}&lng=${country2lng}&formatted=0`);
+
+            $.when(country1SunRequest,country2SunRequest).done(function(data1,data2){
+                var country1sunrise = new Date(data1[0].results.sunrise)
+                var country2sunrise = new Date(data2[0].results.sunrise)
+                var country1sunset = new Date(data1[0].results.sunset)
+                var country2sunset = new Date(data2[0].results.sunset)
+
+                // Sunrise only
+                if (country1sunrise.getTime() < country2sunrise.getTime()){
+                    $('#sunriseresult').html(`Sunrise of ${country1[0][0].name} is later than ${country2[0][0].name} by Difference in ${msToTime(country2sunrise.getTime() - country1sunrise.getTime())}`)
+                } else {
+                    $('#sunriseresult').html(`Sunrise of ${country1[0][0].name} is earlier than ${country2[0][0].name} by Difference in ${msToTime(country1sunrise.getTime() - country2sunrise.getTime())}`)
+                }
+
+                // Sunset only
+                if (country1sunset.getTime() < country2sunset.getTime()){
+                    $('#sunsetresult').html(`Sunset of ${country1[0][0].name} is later than ${country2[0][0].name} by Difference in ${msToTime(country2sunset.getTime() - country1sunset.getTime())}`)
+                } else {
+                    $('#sunsetresult').html(`Sunset of ${country1[0][0].name} is earlier than ${country2[0][0].name} by Difference in ${msToTime(country1sunset.getTime() - country2sunset.getTime())}`)
+                }
+        
+            }).fail(function(error1,error2){
+                alert('Specify your country name!')
+            
+            });
+
+            
+        });
+        
+    }
+
+    // ms to HH:MM:SS
+    function msToTime(s) {
+            function pad(n, z) {
+                z = z || 2;
+                return ('00' + n).slice(-z);
+            }
+
+            var ms = s % 1000;
+            s = (s - ms) / 1000;
+            var secs = s % 60;
+            s = (s - secs) / 60;
+            var mins = s % 60;
+            var hrs = (s - mins) / 60;
+
+            return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+            }
+    // end
+
+    $(document).ready(function(){
+    $("#form").submit(function(){
+        checkSun(function(){;
+
+  });;
+    });
+});
+
+</script>
+</html>

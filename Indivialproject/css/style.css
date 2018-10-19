@@ -1,0 +1,206 @@
+/* All start*/
+body {
+    word-break: break-all;
+}
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+h4 {
+    position: relative;
+    font-size: 2em;
+    line-height: 1.4;
+    padding:0.25em 1em;
+    top:0;
+    display: inline-block;
+    margin-bottom: 80px;
+    margin-top: 20px;
+    font-family: 'Verdana';
+}
+h4:before,h4:after{ 
+      position: absolute;
+      top: 0;
+      content:'';
+    width: 8px;
+    height: 100%;
+    display: inline-block;
+}
+h4:before{
+    border-left: solid 1px black;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+      left: 0;
+}
+h4:after{
+      content: '';
+      border-top: solid 1px black;
+      border-right: solid 1px black;
+      border-bottom: solid 1px black;
+      right: 0;
+}
+h5 {
+    font-size: 1.75em;
+    font-weight:bold;
+    border-bottom: 2px dashed #fff;
+     margin-top: 0px;       /* 上線の外側の余白はナシ */
+     padding-top: 10px;      /* 上線の内側の余白はナシ */
+     margin-bottom: 0.3em;  /* 下線の外側の余白量 */
+     padding-bottom: 0.3em; /* 下線の内側の余白量 */
+     margin-left: 10px;
+     width:40%;
+  }
+.closebtn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
+#topbtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgb(94, 153, 230); /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+
+@keyframes show{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+#topbtn.show{
+    display: block;
+    animation: show 1s linear 0s;
+}
+
+
+#topbtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+}
+/* All end */
+
+/* Navbar start */
+.navbar {
+    color: #000;
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-weight: 400;
+    border-bottom: 1px dotted;
+    background-color: #000;
+    height: auto;
+    opacity: 0.7;
+    transition: all 0.5s;
+}
+.nav-item {
+    display: block;
+    font-size: 1rem;
+}
+.nav-item a {
+    color: #fff;
+}
+
+/* Navbar end */
+
+/* Top start */
+.header-content{
+    height: 100vh;
+    width: auto;
+    
+}
+.message{
+    color: #fff !important;
+    opacity: 0.9;
+    
+}
+/* Top end */
+
+/* About strat */
+#about {
+    min-height: 50vh;
+    background-color:#fff;
+}
+/* About end */
+
+/* Work start */
+.work-content {
+    height: 90vh;
+    overflow:scroll; 
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../img/office.jpg");
+    background-size: cover;
+    /* filter: blur(0.5px); */
+}
+.work-text {
+    opacity: 0.8;
+    color: #fff;
+
+}
+.job {
+    list-style: disc;
+    font-size: 1.25em;
+}
+/* Work end */
+
+/* Target start */
+.target-content {
+    height: auto;
+}
+/* Target end */
+
+/* Album start */
+#album {
+    min-height: 70vh;
+    background-color: #8C8C8C;
+    color: #fff;
+}
+.album-content {
+    height: auto;
+}
+.hint {
+    cursor: pointer; 
+    opacity: 0;
+    transition: opacity 0.5s;   
+    background: rgba(78, 158, 233, 0.8);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.25rem;
+}
+.hint:hover {
+    opacity: 0.9;
+}
+/* Album end */
+
+
+/* Media Query */
+@media only screen and (max-width: 764px) {
+    h5 {
+        font-size: 1em;
+        width:60%;
+    }
+    .job {
+        list-style: disc;
+        font-size: 0.9em;
+    }
+  }
+/* Media Query */

@@ -1,0 +1,44 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Checking Sunset!</h1>
+        <form action="" id="form" onsubmit="return false;">
+                <input type='text' name="lat" placeholder="Latitude" value="36.7201600"/>
+                <input type="text" name="lng" placeholder="Longitude" value="-4.4203400" />
+                <input type='submit' value="submit"/>
+        </form>
+        <p></p>
+    </body>
+<script type='text/javascript'>
+        let checkSun = function(callback){
+        var serializedInputString = $('#form').serialize();
+        // serializedInputString is name=John&email=john@example.com&tel=12345678
+        // It worked for both POST and GET request.
+        $.ajax({
+            type:'GET',
+            url:`https://api.sunrise-sunset.org/json?${serializedInputString}`,
+            dataType: "json",
+            success: function(data){
+                callback(data);
+                // console.log(data.results.sunrise);
+                // console.log(data.results.sunset);
+                // $('p').html(typeof data);
+                // Success handler
+            },
+            error: function(data){
+                // error handler
+            }
+        });
+    };
+    $(document).ready(function(){
+    $("#form").submit(function(){
+        checkSun(function(callback){
+    $('p').html(`<b>Sunrise</b>: ${callback.results.sunrise} <b>Sunset</b>: ${callback.results.sunset}`);
+  });;
+    });
+});
+
+</script>
+</html>

@@ -1,0 +1,51 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Checking the day length of the position</h1>
+        <h3>longer or shorter than Hong Kong or not?</h3>
+        <form action="" id="form" onsubmit="return false;">
+                <input type='text' name="lat" placeholder="Latitude" value="36"/>
+                <input type="text" name="lng" placeholder="Longitude" value="-4"/>
+                <input type='submit' value="submit"/>
+        </form>
+        <p></p>
+    </body>
+<script type='text/javascript'>
+
+        let checkSun = function(){
+        var serializedInputString = $('#form').serialize();
+        var hkinfo = $.get(`https://api.sunrise-sunset.org/json?lat=22.31&lng=114&formatted=0`);
+        var inputinfo = $.get(`https://api.sunrise-sunset.org/json?${serializedInputString}&formatted=0`);
+
+        var combined = $.when(hkinfo, inputinfo);
+
+        combined.done(function(hk,input){
+            let hksunrise = new Date(hk[0].results.sunrise);
+            let hksunset = new Date(hk[0].results.sunset);
+            let hkDayLength = hksunset.getTime() - hksunrise.getTime();
+            let inputsunrise = new Date(input[0].results.sunrise);
+            let inputsunset = new Date(input[0].results.sunset);
+            let inputDayLength = inputsunset.getTime() - inputsunrise.getTime();
+            $('p').html(((hkDayLength < inputDayLength) ? "The corresponding have a longer day length" : "Hong Kong hava a longer day length"));
+ 
+        }).fail(function(error1,error2){
+            console.log(error1);
+            console.log(error2);
+        }).always(function(){
+            ;
+        });
+        
+    };
+
+    $(document).ready(function(){
+    $("#form").submit(function(){
+        checkSun(function(){;
+
+  });;
+    });
+});
+
+</script>
+</html>
