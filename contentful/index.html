@@ -1,0 +1,58 @@
+<head>
+
+</head>
+<body>
+<p id="demo"></p>
+</body>
+<!-- SDK to read Data from Contentful
+<script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+<script type='text/javascript'>
+    let cdaClient = contentful.createClient({
+        space : "1tz7d7itnpxk",
+        accessToken: "12e943207090816a9ec08f8d0fe20651197a05099450eb1b59cfd5329c4fcdd7"
+    });
+
+    
+    // Get all the entries from server , no matter what content-types are.
+    cdaClient.getEntries().then(console.log);
+
+    // Get all the entires of content-type from server.
+    cdaClient.getEntries({content_type:"computer"})
+                    .then((result)=>result.items)
+                    .then((items)=> items.map((item)=>item.fields))
+                    .then(function(data) {console.log(data[0].brand)})
+                    // .then(function(data) {document.write(data)})
+                    // .then(JSON.stringify)
+                    // .then(function(data) {document.write(typeof data)});
+                    // .then(console.log)
+
+    // document.write(save);
+
+
+</script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/contentful-management@latest/dist/contentful-management.browser.min.js"></script>
+        <script type='text/javascript'>
+            let cmaClient = contentfulManagement.createClient({
+                accessToken: "CFPAT-e0ad8d2fcd031c60b07dad5c58bfcd9947056a9fabd6559a276a574f9b69bd8d"
+            });
+            cmaClient.getSpace('1tz7d7itnpxk').then((space)=>
+                space.createEntry('computer',{
+                    fields:{
+                        brand: {
+                            "en-US":"lenovo"
+                        },
+                        price: {
+                            "en-US":1500
+                        },
+                        model: {
+                            "en-US":"Thinkpad"
+                        },
+                        description: {
+                            "en-US":"Thinkpad is Lenovo's Flagship product for ultrabook."
+                        }
+                    }
+                })
+            ).then((entry)=> entry.publish())
+            .catch(console.error);
+        </script>
