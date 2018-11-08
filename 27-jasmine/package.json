@@ -1,0 +1,16 @@
+{
+  "name": "27-jasmine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "starwars.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "supertest": "^3.3.0"
+  }
+}

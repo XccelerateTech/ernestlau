@@ -4,8 +4,10 @@
   "description": "",
   "main": "FSpromise.js",
   "dependencies": {
-    "fetch-node": "0.0.1",
+    "connect": "^3.6.6",
+    "express": "^4.16.4",
     "node-fetch": "^2.2.0",
+    "qs": "^6.5.2",
     "util": "^0.11.0"
   },
   "devDependencies": {},

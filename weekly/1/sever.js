@@ -39,25 +39,26 @@ app.post('/upload-multi', upload.array('myfile', 20), function (req, res, next) 
 })
 //Single upload
 app.post('/upload-single', upload.single('myfile'), function (req, res, next) {
-    console.log(req.file)
+    // if(req.file.size > 4000){
+    //     global.window.alert('hi')
+    // }
     var file = req.file;
-    console.log(file)
-    console.log("名稱：%s", file.originalname);
-    console.log("mime：%s", file.mimetype);
+    // console.log("名稱：%s", file.originalname);
+    // console.log("mime：%s", file.mimetype);
     //got file type
-    name = file.originalname;
-    nameArray = name.split('');
-    var nameMime = [];
-    l = nameArray.pop();
-    nameMime.unshift(l);
-    while (nameArray.length != 0 && l != '.') {
-        l = nameArray.pop();
-        nameMime.unshift(l);
-    }
-    //save file mime
-    Mime = nameMime.join('');
-    console.log(Mime);
-    res.send("done");
+    var name = file.originalname;
+    // var nameArray = name.split('');
+    // var nameMime = [];
+    // l = nameArray.pop();
+    // nameMime.unshift(l);
+    // while (nameArray.length != 0 && l != '.') {
+    //     l = nameArray.pop();
+    //     nameMime.unshift(l);
+    // }
+    // //save file mime
+    // Mime = nameMime.join('');
+    // console.log(Mime);
+    res.send(`Done! You've uploaded ${name}`);
     //rename file & plus mine
     console.log('show me name: ' + './uploads/' + file.filename)
     console.log('show me name: ' + './uploads/' + name)
@@ -78,4 +79,7 @@ app.get('/', function (req, res, next) {
 app.get('/uploads/:id', function (req, res) {
     res.sendFile(path.join(__dirname, `/uploads/${req.params.id}`));
 });
-app.listen(port, console.log(`hi there! Server listen in port ${port}`));
+
+app.listen(3000, '0.0.0.0', function() {
+    console.log('Listening to port:  ' + 3000);
+});
