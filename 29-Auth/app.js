@@ -4,13 +4,32 @@ var basicAuth = require('express-basic-auth')
 var app = express();
 
 app.use(basicAuth({
-    users: { 'admin': '12345' },
+    authorizer: myAuthorizer,
     challenge: true,
-    // realm: 'My Application'
-}))
+    realm: 'My Application'
+}));
+
+const USERS = [
+    {
+        "username":"gordon",
+        "password":"abc"
+    },
+    {
+        "username":"test",
+        "password":"abc"
+    }
+]
+
+function myAuthorizer(username, password) {
+    return USERS.some((user)=>{
+        return user.username == username && user.password == password
+    })
+}
 
 app.get('/', (req,res)=>{
-    res.send('Hello there!')
+    var userHeader = new Buffer(req.headers.authorization.split(" ")[1], 'base64').toString()
+    console.log(userHeader.indexOf(':'))
+    res.send('Hello there!' + userHeader.substring(0, userHeader.indexOf(':')))
 })
 
 app.get('/pk', (req,res)=>{
