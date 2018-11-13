@@ -26,7 +26,8 @@ $(document).ready(function () {
     });
 
     $('li').on('click', function () {
-        var item = encodeURIComponent($(this).text().trim().replace(/ /g, "-"));
+        var item = encodeURIComponent($(this).text().trim());
+        console.log(item);
         $.ajax({
             type: 'DELETE',
             url: '/todo/' + item,

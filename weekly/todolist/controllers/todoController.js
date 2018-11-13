@@ -95,7 +95,7 @@ module.exports = function (app) {
     });
 
     app.delete('/todo/:item', (req, res) => {
-        Todo.deleteOne({ item: req.params.item.replace(/-/g, " ") }, function (err, data) {
+        Todo.deleteOne({ item: req.params.item}, function (err, data) {
             if (err) throw err;
             res.end();
         })
@@ -113,6 +113,7 @@ module.exports = function (app) {
         res.render('loginpage', {info: ""})
     });
 
+    /* Authcheck, if fail, return to login page*/
     function authCheck(req, res, next){
         if (req.isAuthenticated()) {
             next();
