@@ -59,12 +59,10 @@ const authCheck2 = (req,res,next) =>{
 }
 //
 
-const options = {
-    cert: fs.readFileSync('./localhost.crt'),
-    key: fs.readFileSync('./localhost.key')
-  };
-  
-require('dotenv').config()
+// const options = {
+//     cert: fs.readFileSync('./localhost.crt'),
+//     key: fs.readFileSync('./localhost.key')
+//   };
 
 // var index = require('./routes/index');
 
