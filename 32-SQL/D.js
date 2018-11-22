@@ -54,7 +54,7 @@ async function buy(fruit, amount, callback){
         await client.query('BEGIN')
         await client.query(`UPDATE stock SET quantity = quantity+${amount} FROM citrus WHERE stock.citrus_id = citrus.id AND citrus.name = '${fruit}';`)
         await client.query('COMMIT')
-        await console.log(`Transaction is committed! @BUY@ OK!!`)
+        // await console.log(`Transaction is committed! @BUY@ OK!!`)
 
     }catch(err){
         await client.query('ROLLBACK')
@@ -84,7 +84,7 @@ function sell(fruit, amount, callback) {
     client.query(`SELECT * FROM stock,citrus WHERE quantity > ${amount} AND stock.citrus_id = citrus.id AND citrus.name = '${fruit}';`, function (err, results) {
         if (err || results.rows.length == 0) {
             rollback(function () {
-                console.log(`Transaction is rolled back! Maybe ${fruit}'s stock not enough?`);
+                console.log(`A Transaction is rolled back! Maybe ${fruit}'s stock not enough?`);
             });
         } else {
             client.query(`UPDATE stock SET quantity = quantity-${amount} FROM citrus WHERE stock.citrus_id = citrus.id AND citrus.name = '${fruit}';`, function (err, results) {
@@ -94,7 +94,7 @@ function sell(fruit, amount, callback) {
                     });
                 } else {
                     commit(function () {
-                        console.log(`Transaction is committed! @SELL@ OK!!`);
+                        // console.log(`Transaction is committed! @SELL@ OK!!`);
                     });
                 };
             });
@@ -107,18 +107,21 @@ function sell(fruit, amount, callback) {
 //CSV reader
 inputStream
     .pipe(CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true }))
-    .on('data', function (row) {
-        console.log('A row arrived: ', row);
+    .on('data', async function (row) {
+        console.time('readCSV');
         if (row[0] == 'SELL') {
             sell(row[1],row[2]);
+            console.log(`SELL OK! ${row[1]}.`)
         } else if (row[0] == 'BUY'){
-            buy(row[1],row[2])
+            buy(row[1],row[2]);
+            console.log(`BUY OK! ${row[1]}.`)
         } else {
 
         }
     })
     .on('end', function (data) {
         console.log('No more rows!');
+        console.timeEnd('readCSV');
     });
 
 //
