@@ -35,7 +35,7 @@ passport.deserializeUser((user, done) => {
 passport.use(new FacebookStrategy({
     clientID: '2317982038275442',
     clientSecret: 'a6930385cd103d2fdf7349feb743877c',
-    callbackURL: "https://localhost:3001/auth/facebook/callback",
+    callbackURL: "https://smellyasshole.club/auth/facebook/callback",
     profileFields: ['id', 'displayName', 'photos', 'email']
 }, (accessToken, refreshToken, profile, done) => {
     done(null, profile)
