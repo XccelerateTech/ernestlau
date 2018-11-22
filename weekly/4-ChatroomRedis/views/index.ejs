@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link href="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.css" rel='stylesheet'>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/en-gb.js'></script>
+</head>
+
+<body>
+  <div class="chats">
+
+  </div>
+  <div class="message">
+    <input style="color:grey;" id="name" type="text" placeholder="your name" value="<%= username %>" readonly/>
+    <input id="msg" type="text" placeholder="input the message" />
+    <button>Send</button>
+  </div>
+  <a href='/auth/logout'><p>Logout</p></a>
+</body>
+
+<script src='./javascripts/app.js'></script>
+
+</html>
