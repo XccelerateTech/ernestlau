@@ -32,9 +32,8 @@ io.on('connection', async (socket) => {
 
     const history = await socketHander.getMessages();
     const socketid = socket.id;
-    // console.log(`history: ${history}`)
 
-    // io.to(socketid).emit('history', history);
+    io.to(socketid).emit('history', history);
 
     socket.on("disconnect", () => {
         console.log("a user go out");
