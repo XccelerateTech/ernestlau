@@ -1,0 +1,16 @@
+name: Dart
+description: A sample command-line application.
+version: 0.0.1
+#homepage: https://www.example.com
+#author: rootshell <email@example.com>
+
+environment:
+  sdk: '>=1.20.1'
+
+dependencies:
+ path: ^1.4.1
+ http: ^0.12.0+1
+ archive: ^2.0.8
+ pointycastle: ^1.0.0
+
+dev_dependencies:

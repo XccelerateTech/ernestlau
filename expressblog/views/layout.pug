@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+  head
+    title Knowledgebase
+    link(rel="stylesheet", href="/bower_components/bootstrap/dist/css/bootstrap.css")
+    link(rel="stylesheet", href="/css/style.css")
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.5.0/css/all.css', integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU', crossorigin='anonymous')
+
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-2
+      .container
+        a.navbar-brand(href='/') Knowledgebase
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExample05', aria-controls='navbarsExample05', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarsExample05.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a.nav-link(href='/')
+                | Home
+                span.sr-only (current)
+            if user
+              li.nav-item
+                a.nav-link(href='/articles/new') Add Article
+          ul.navbar-nav.narbar-right
+            if user
+              li.nav-item
+                a.nav-link(href='/users/logout') 
+                  i.fas.fa-sign-out-alt.px-2  
+                  |Logout
+            else
+              li.nav-item
+                a.nav-link(href='/users/register') 
+                  i.fas.fa-male.px-2 
+                  |Sign Up
+              li.nav-item
+                a.nav-link(href='/users/login') 
+                 i.fas.fa-sign-in-alt.px-2  
+                 |Login
+
+    .container
+      != messages('message', locals)
+      if errors
+        each error, i in errors
+            div(class="alert alert-danger") #{error.param} #{error.msg}
+      block content
+      br
+      hr
+      footer
+        p Copyright &copy; 2018
+
+    script(src="/bower_components/jquery/dist/jquery.js")
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
+    script(src="/js/main.js")
